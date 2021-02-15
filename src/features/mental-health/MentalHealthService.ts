@@ -1,10 +1,9 @@
 import { PatientInfosRequest } from '@covid/core/user/dto/UserAPIContracts';
 
-import { IAssessmentRemoteClient } from './AssessmentApiClient';
-import { IAssessmentState } from './AssessmentState';
 import { MentalHealthInfosRequest } from './MentalHealthInfosRequest';
 import { TMentalHealthResponse } from './MentalHealthResponse';
 import { MentalHealthApiClient } from './MentalHealthApiClient';
+import { IMentalHealthState } from '@covid/core/state/mental-health/state/types';
 
 export interface IMentalHealthService {
   initMentalHealth(patientId: string): void;
@@ -17,9 +16,9 @@ export interface IMentalHealthService {
 
 export default class MentalHealthService implements IMentalHealthService {
   mentalHealthApiClient: MentalHealthApiClient;
-  state: IAssessmentState;
+  state: IMentalHealthState;
 
-  constructor(apiClient: IAssessmentRemoteClient, state: IAssessmentState) {
+  constructor(apiClient: MentalHealthApiClient, state: IMentalHealthState) {
     this.mentalHealthApiClient = apiClient;
     this.state = state;
   }
@@ -35,20 +34,23 @@ export default class MentalHealthService implements IMentalHealthService {
   }
 
   private async sendFullAssessmentToApi() {
-    try {
-      const mentalHealth = this.state.getAssessment();
-      const response = await this.saveToApi(mentalHealth);
-      if (response.id) {
-        this.state.updateAssessment({ id: response.id });
-      }
-      return response;
-    } catch (error) {
-      throw error;
-    }
+    
+    // TODO
+    
+    // try {
+    //   const mentalHealth = this.state.getAssessment();
+    //   const response = await this.saveToApi(mentalHealth);
+    //   if (response.id) {
+    //     this.state.updateAssessment({ id: response.id });
+    //   }
+    //   return response;
+    // } catch (error) {
+    //   throw error;
+    // }
   }
 
   private saveToState(assessment: Partial<MentalHealthInfosRequest>) {
-    return this.state.updateAssessment(assessment);
+    // return this.state.updateAssessment(assessment);
   }
 
   initMentalHealth(patientId: string) {
@@ -56,7 +58,7 @@ export default class MentalHealthService implements IMentalHealthService {
       patient: patientId,
     } as Partial<MentalHealthInfosRequest>;
 
-    this.state.initMentalHealth(assessment);
+    // this.state.initMentalHealth(assessment);
   }
 
   saveMentalHealth(assessment: Partial<MentalHealthInfosRequest>) {
