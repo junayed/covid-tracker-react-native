@@ -49,22 +49,22 @@ export type MentalHealthInfosRequest = {
     psychosis_or_psychotic_ilness?: boolean;
     other?: boolean;
     prefer_not_to_say?: boolean;
-  }
+  };
 
   // Section 4
   needed_support_in_the_last_6_months?: THasDiagnosis;
   able_to_get_support?: THasDiagnosis;
-  
+
   // # Section 5
   about_your_learning_needs?: THasDiagnosis;
-    learning_needs_data?: {
-        dyslexia?: boolean;
-        dyscalculia?: boolean;
-        dysgraphia?: boolean;
-        non_verbal?: boolean;
-        oral?: boolean;
-        sensory_imapirment?: boolean;
-        other?: boolean;
-        prefer_not_to_say?: boolean;
-    }
+  learning_needs_data?: {
+    dyslexia?: boolean;
+    dyscalculia?: boolean;
+    dysgraphia?: boolean;
+    non_verbal?: boolean;
+    oral?: boolean;
+    sensory_imapirment?: boolean;
+    other?: boolean;
+    prefer_not_to_say?: boolean;
+  };
 };

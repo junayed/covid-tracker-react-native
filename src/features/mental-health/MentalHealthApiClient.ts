@@ -24,8 +24,8 @@ export class MentalHealthApiClient implements IMentalHealthApiClient {
 
   add(patientId: string, mentalHealth: MentalHealthInfosRequest): Promise<TMentalHealthResponse> {
     mentalHealth = {
-        patient: patientId,
-        ...mentalHealth,
+      patient: patientId,
+      ...mentalHealth,
     };
     return this.apiClient.post<MentalHealthInfosRequest, TMentalHealthResponse>(API_URL, mentalHealth);
   }

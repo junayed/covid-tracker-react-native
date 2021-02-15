@@ -3,23 +3,22 @@ import { View } from 'react-native';
 
 import { BasicPage, Text, SpeechCard, Icon } from '@covid/components';
 import NavigatorService from '@covid/NavigatorService';
-import { Profile } from '../partials';
 import { mentalHealthApiClient } from '@covid/Services';
-import { MentalHealthInfosRequest } from '../MentalHealthInfosRequest';
 import UserService from '@covid/core/user/UserService';
 
+import { Profile } from '../partials';
+import { MentalHealthInfosRequest } from '../MentalHealthInfosRequest';
 
 function MentalHealthStart() {
-
-  const apiDemoFunctions = async () => { 
-    console.log('MentalHealthStart apiDemoFunctions')
-    const currentPatientId: string = await new UserService().getFirstPatientId() || '';
+  const apiDemoFunctions = async () => {
+    console.log('MentalHealthStart apiDemoFunctions');
+    const currentPatientId: string = (await new UserService().getFirstPatientId()) ?? '';
     console.log(` > Create mental health record for ${currentPatientId}`);
 
     // Create a record
     const newMentalHealth: MentalHealthInfosRequest = {
-      drinking_alcohol: "LESS",
-      eating_savoury_snacks_or_confectionary: "LESS",
+      drinking_alcohol: 'LESS',
+      eating_savoury_snacks_or_confectionary: 'LESS',
     };
     await mentalHealthApiClient.add(currentPatientId, newMentalHealth);
 
@@ -29,23 +28,22 @@ function MentalHealthStart() {
     console.log(' > existingMentalHealth is... ', existingMentalHealth);
 
     const updatedMentalHealth: MentalHealthInfosRequest = {
-        ...existingMentalHealth,
-        drinking_alcohol: "MORE",
-        eating_savoury_snacks_or_confectionary: "MORE",
+      ...existingMentalHealth,
+      drinking_alcohol: 'MORE',
+      eating_savoury_snacks_or_confectionary: 'MORE',
     };
     await mentalHealthApiClient.update(existingMentalHealth.id, updatedMentalHealth);
 
     const existingMentalHealthUpdated = await mentalHealthApiClient.get();
     console.log(' > existingMentalHealthUpdated is... ', existingMentalHealthUpdated);
-  }
+  };
 
   apiDemoFunctions();
 
   return (
-
     <BasicPage footerTitle="Start" onPress={() => NavigatorService.navigate('MentalHealthChanges', undefined)}>
       <Profile />
-  
+
       <SpeechCard>
         <Text rhythm={16} textClass="pLight">
           We are currently investigating how the pandemic has had an impact on our mental health.
