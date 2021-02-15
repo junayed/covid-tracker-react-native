@@ -34,6 +34,5 @@ export const assessmentService = new AssessmentService(assessmentApiClient, asse
 const vaccineApiClient = new VaccineApiClient(apiClient);
 export const vaccineService = new VaccineService(vaccineApiClient);
 
-const mentalHealthState = new ReduxAssessmentState();
-const mentalHealthApiClient = new MentalHealthApiClient(apiClient);
-export const mentalHealthService = new MentalHealthService(mentalHealthApiClient, mentalHealthState);
+export const mentalHealthApiClient = new MentalHealthApiClient(apiClient);
+//export const mentalHealthService = new MentalHealthService(mentalHealthApiClient, mentalHealthState);
