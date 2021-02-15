@@ -11,6 +11,8 @@ import { AssessmentApiClient } from './core/assessment/AssessmentApiClient';
 import AssessmentService from './core/assessment/AssessmentService';
 import ReduxAssessmentState from './core/assessment/AssessmentState';
 import ExpoPushTokenEnvironment from './core/push-notifications/expo';
+import { MentalHealthApiClient } from './features/mental-health/MentalHealthApiClient';
+import { MentalHealthService } from './features/mental-health/MentalHealthService';
 
 const apiClient = new ApiClient();
 const localStorageService = new LocalStorageService();
@@ -31,3 +33,6 @@ export const assessmentService = new AssessmentService(assessmentApiClient, asse
 
 const vaccineApiClient = new VaccineApiClient(apiClient);
 export const vaccineService = new VaccineService(vaccineApiClient);
+
+const mentalHealthApiClient = new MentalHealthApiClient(apiClient);
+export const mentalHealthService = new MentalHealthService(mentalHealthApiClient);
