@@ -1,73 +1,46 @@
+import { TMentalHealthFrequency, TMentalHealthChange, THasDiagnosis } from '@covid/core/state';
+
 export type MentalHealthInfosRequest = {
-  version: string; // document/schema version
   patient: string; //	Patient id
-  id: string; // Assessment id
+  id: string; // Mental Health entry id
 
-  //Covid test
-  had_covid_test: boolean;
-  tested_covid_positive: string;
+  // Fields/questions...
 
-  health_status: string; //'healthy' for healthy as normal, 'not_healthy' for not feeling quite right
-  fever: boolean; //defaults to False
-  temperature: number; //can be null
-  temperature_unit: string; //'C' for centigrade, 'F' for Fahrenheit
-  nausea: boolean; //defaults to False
-  dizzy_light_headed: boolean; //defaults to False
-  persistent_cough: boolean; //defaults to False
-  fatigue: string; //'no', 'mild' or 'severe', defaults to 'no'
-  headache: boolean; // defaults to False
-  headache_frequency: string | null; // 'all_of_the_day', 'most_of_day', 'some_of_day'
-  shortness_of_breath: string; //'no', 'mild', 'significant' or 'severe', defaults to 'no'
-  red_welts_on_face_or_lips: boolean; // defaults to False
-  blisters_on_feet: boolean; // defaults to False
-  loss_of_smell: boolean; // defaults to False
-  hoarse_voice: boolean; // defaults to False
-  chest_pain: boolean; // defaults to False
-  abdominal_pain: boolean; // defaults to False
-  eye_soreness: boolean; //defaults to False
-  typical_hayfever: boolean; //defaults to False
-  other_symptoms: string | null;
+  // Section 1 - Changes questions
+  sleeping_well: TMentalHealthChange;
+  being_physically_active_or_doing_exercise: TMentalHealthChange;
+  spending_time_green_in_spaces: TMentalHealthChange;
+  spending_time_with_pets: TMentalHealthChange;
+  smoking_or_vaping: TMentalHealthChange;
+  drinking_alcohol: TMentalHealthChange;
+  interacting_face_to_face_With_family_friends: TMentalHealthChange;
+  talking_to_family_friends_via_phone_or_technology: TMentalHealthChange;
+  feeling_more_alone: TMentalHealthChange;
+  working: TMentalHealthChange;
+  relaxation_mindfulness_meditation: TMentalHealthChange;
+  reading_watching_listening_to_the_news: TMentalHealthChange;
+  using_devices_with_a_screen: TMentalHealthChange;
+  eating_savoury_snacks_or_confectionary: TMentalHealthChange;
+  engaging_in_orgs_clubs_socs: TMentalHealthChange;
 
-  diarrhoea: boolean; //	defaults to False
-  unusual_muscle_pains: boolean; //	defaults to False
-  delirium: boolean; //defaults to False
-  skipped_meals: boolean; //defaults to False
-  location: string; //'home', 'hospital', 'back_from_hospital', can be null
-  treatment: string; //	I left this as a free text field, because there is the option to add 'other treatment'.
+  // Section 2 - Frequency questions
+  little_interest_or_pleasure_in_doing_things: TMentalHealthFrequency;
+  feeling_down: TMentalHealthFrequency;
+  feeling_nervous: TMentalHealthFrequency;
+  not_being_able_to_control_worrying: TMentalHealthFrequency;
 
-  interacted_any_patients: boolean;
-  treated_patients_with_covid: string;
-  have_used_PPE: string;
-  always_used_shortage: string;
-  sometimes_used_shortage: string;
-  never_used_shortage: string;
+  // Yes/No/Prefer not to say.
+  // Yes links to a list of boolean
 
-  worn_face_mask: string;
-  mask_cloth_or_scarf: boolean;
-  mask_surgical: boolean;
-  mask_n95_ffp: boolean;
-  mask_not_sure_pfnts: boolean;
-  mask_other: string;
+  // Sectionn 3
+  ever_diagnosed_with_mental_health_condition: THasDiagnosis;
+  //  mental_health_history_data = models.OneToOneField('MentalHealthHistory', blank=True, null=True, on_delete=models.CASCADE)
 
-  current_postcode: string;
-  current_country_code: string;
+  // Section 4
+  needed_support_in_the_last_6_months: THasDiagnosis;
+  able_to_get_support: THasDiagnosis;
 
-  //defaults to False
-  rash: boolean;
-  skin_burning: boolean;
-  hair_loss: boolean;
-  feeling_down: boolean;
-  brain_fog: boolean;
-  altered_smell: boolean;
-  runny_nose: boolean;
-  sneezing: boolean;
-  earache: boolean;
-  ear_ringing: boolean;
-  sore_throat: boolean;
-  swollen_glands: boolean;
-  irregular_heartbeat: boolean;
-  chills_or_shivers: boolean;
-  unusual_joint_pains: boolean;
-  mouth_ulcers: boolean;
-  tongue_surface: boolean;
+  // # Section 5
+  about_your_learning_needs: THasDiagnosis;
+  //learning_needs_data = models.OneToOneField('MentalHealthLEarningNeeds', blank=True, null=True, on_delete=models.CASCADE)
 };
